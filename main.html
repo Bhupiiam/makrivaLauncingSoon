@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Makriva — Coming Soon</title>
+  <meta name="description" content="Makriva — premium makhana (fox nuts). Fresh, light, and delightfully crunchy. Launching soon." />
+  <meta name="theme-color" content="#f6efe5" />
+  <style>
+    :root {
+      --bg: #faf6ef;            /* warm cream */
+      --bg-2: #f1eadf;          /* deeper cream */
+      --text: #2d2319;          /* roasted-brown */
+      --muted: #6d5e4e;
+      --accent: #4e8b63;        /* pistachio green */
+      --accent-2: #9cc49f;      /* soft green */
+      --chip: #efe7dc;
+      --ring: rgba(78, 139, 99, .35);
+      --shadow: 0 10px 30px rgba(45, 35, 25, .15);
+      --radius: 18px;
+      --maxw: 1024px;
+    }
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%) ,
+                  radial-gradient(800px 500px at 90% 10%, #fff, transparent 60%),
+                  radial-gradient(900px 600px at 50% 110%, #fff, transparent 60%),
+                  linear-gradient(180deg, var(--bg), var(--bg-2));
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Organic seed shapes in the background */
+    .seeds {
+      position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .2;
+      background-image:
+        radial-gradient(20px 14px at 12% 22%, #c7b8a1 40%, transparent 41%),
+        radial-gradient(22px 15px at 78% 28%, #c7b8a1 40%, transparent 41%),
+        radial-gradient(18px 13px at 30% 78%, #c7b8a1 40%, transparent 41%),
+        radial-gradient(16px 12px at 72% 74%, #c7b8a1 40%, transparent 41%);
+      filter: blur(.4px);
+    }
+
+    .wrap {
+      display: grid;
+      place-items: center;
+      min-height: 100dvh;
+      padding: clamp(16px, 3.5vw, 40px);
+    }
+
+    .card {
+      width: min(100%, var(--maxw));
+      background: rgba(255, 255, 255, .6);
+      border: 1px solid rgba(0,0,0,.04);
+      backdrop-filter: saturate(140%) blur(8px);
+      border-radius: clamp(14px, 2vw, var(--radius));
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(16px, 2.8vw, 28px);
+    }
+
+    .hero > section { padding: clamp(20px, 4.2vw, 60px); }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px; margin-bottom: clamp(6px, 1.2vw, 8px);
+      text-decoration: none; color: inherit;
+    }
+
+    .logo {
+      width: 40px; height: 40px; border-radius: 12px; display: inline-grid; place-items: center;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px var(--ring);
+    }
+
+    .brand-name {
+      font-size: clamp(22px, 3.6vw, 30px); font-weight: 700; letter-spacing: .5px;
+    }
+
+    h1 { font-size: clamp(24px, 5vw, 52px); line-height: 1.05; margin: 10px 0 12px; }
+    p.lead { font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); margin: 0 0 18px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
+    .chip { background: var(--chip); color: #5a4d3e; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
+
+    .cta {
+      display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center;
+      margin-top: 14px;
+    }
+    .cta input[type="email"] {
+      width: 100%; padding: 14px 14px; border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px; background: #fff; outline: none;
+      font-size: 16px;
+    }
+    .cta button {
+      padding: 14px 18px; border: 0; border-radius: 12px; cursor: pointer; font-weight: 700;
+      background: linear-gradient(180deg, var(--accent), #3d7451);
+      color: #fff; box-shadow: 0 8px 22px var(--ring);
+    }
+    .cta button:active { transform: translateY(1px); }
+
+    .countdown { display: flex; gap: 14px; margin-top: 22px; }
+    .tile {
+      flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06);
+      border-radius: 14px; text-align: center; padding: 12px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    }
+    .num { font-size: clamp(22px, 4vw, 34px); font-weight: 800; }
+    .lbl { font-size: 12px; color: var(--muted); letter-spacing: .3px; text-transform: uppercase; }
+
+    .aside {
+      background: linear-gradient(180deg, #fff, #f8f4ed);
+      border-left: 1px solid rgba(0,0,0,.05);
+      display: grid; place-items: center; position: relative; overflow: hidden;
+    }
+    .pack {
+      width: min(92%, 420px); aspect-ratio: 4/5; border-radius: 28px;
+      background: radial-gradient(120% 90% at 30% 12%, #fff, #f2eee6 55%, #e9e1d6 100%);
+      box-shadow: 0 16px 40px rgba(45,35,25,.18), 0 3px 0 #e2d7c7 inset;
+      border: 1px solid rgba(0,0,0,.05);
+      padding: 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 10px;
+      transform: rotate(-4deg);
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float { 50% { transform: rotate(-3deg) translateY(-6px); } }
+
+    .pack .top { display: flex; align-items: center; gap: 10px; }
+    .pack .leaf {
+      width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2)); color: #fff;
+      box-shadow: 0 6px 18px var(--ring);
+    }
+    .pack h2 { margin: 0; font-size: 18px; letter-spacing: .4px; }
+
+    .pack .middle {
+      display: grid; place-items: center; position: relative; isolation: isolate;
+    }
+    .makhana {
+      width: 75%; aspect-ratio: 1;
+      background:
+        radial-gradient(120px 80px at 40% 30%, #fff, rgba(255,255,255,.8) 45%, transparent 46%),
+        radial-gradient(120px 80px at 70% 70%, #fff, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(closest-side, #eadfcd 70%, #d8c9b2 71%);
+      border-radius: 50%;
+      box-shadow: 0 18px 40px rgba(45,35,25,.18) , 0 0 0 1px rgba(0,0,0,.05) inset;
+      position: relative;
+    }
+    .makhana::after, .makhana::before {
+      content: ""; position: absolute; background: #d1c2ab; filter: blur(.2px);
+      border-radius: 50%; opacity: .6;
+    }
+    .makhana::after { width: 28%; height: 20%; left: 58%; top: 42%; transform: rotate(22deg); }
+    .makhana::before { width: 18%; height: 14%; left: 32%; top: 58%; transform: rotate(-12deg); }
+
+    .pack .bottom {
+      display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted);
+    }
+    .badge { background: #e8f3eb; color: #2f6b47; padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 11px; letter-spacing: .3px; }
+
+    .footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px clamp(20px, 4.2vw, 60px); border-top: 1px solid rgba(0,0,0,.06);
+      background: #fff9; backdrop-filter: blur(6px);
+    }
+
+    .social { display: flex; gap: 12px; }
+    .social a { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--chip); color: var(--text); border: 1px solid rgba(0,0,0,.05); text-decoration: none; }
+    .small { font-size: 13px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .aside { order: -1; }
+      .pack { transform: none; animation: none; margin: 10px 0; }
+      .countdown { justify-content: space-between; }
+    }
+
+    /* Focus styles */
+    :focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; border-radius: 8px; }
+
+    /* Utility */
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+  </style>
+</head>
+<body>
+  <div class="seeds" aria-hidden="true"></div>
+  <main class="wrap">
+    <div class="card" role="region" aria-label="Makriva coming soon">
+      <div class="hero">
+        <section>
+          <a class="brand" href="#" aria-label="Makriva home">
+            <span class="logo" aria-hidden="true">
+              <!-- leaf icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8" fill="none"/>
+              </svg>
+            </span>
+            <span class="brand-name">Makriva</span>
+          </a>
+
+          <h1>Fresh. Light. <span style="white-space:nowrap">Coming Soon.</span></h1>
+          <p class="lead">Premium makhana (fox nuts) — roasted to perfection, seasoned with care. We’re getting the crunch just right before we launch.</p>
+
+          <div class="chips" aria-hidden="true">
+            <span class="chip">100% Natural</span>
+            <span class="chip">Roasted • Gluten‑free</span>
+            <span class="chip">Made in India</span>
+          </div>
+
+          <form class="cta" action="#" method="post" onsubmit="subscribe(event)" aria-label="Notify form">
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" name="email" type="email" inputmode="email" placeholder="Enter your email for launch updates" required aria-required="true" />
+            <button type="submit" aria-label="Notify me when Makriva launches">Notify me</button>
+          </form>
+          <div id="feedback" class="small" role="status" aria-live="polite" style="min-height:1.4em; margin-top:6px"></div>
+
+          <div class="countdown" role="group" aria-label="Countdown to launch">
+            <div class="tile" aria-label="Days"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
+            <div class="tile" aria-label="Hours"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
+            <div class="tile" aria-label="Minutes"><div class="num" id="m">—</div><div class="lbl">Mins</div></div>
+            <div class="tile" aria-label="Seconds"><div class="num" id="s">—</div><div class="lbl">Secs</div></div>
+          </div>
+        </section>
+
+        <aside class="aside">
+          <!-- playful, brandable pack mockup -->
+          <div class="pack" aria-hidden="true">
+            <div class="top">
+              <span class="leaf">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8" fill="none"/>
+                </svg>
+              </span>
+              <h2>Makriva</h2>
+            </div>
+            <div class="middle">
+              <div class="makhana"></div>
+            </div>
+            <div class="bottom">
+              <span>Premium Roasted Makhana</span>
+              <span class="badge">Launching Soon</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="footer">
+        <div class="small">Made with ❤ in India • <strong>Makriva</strong></div>
+        <nav class="social" aria-label="Social links">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="X (Twitter)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </a>
+          <a href="mailto:hello@makriva.com" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            </svg>
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // === CONFIG ===
+    // Set your launch date/time here (local time). Example: '2026-01-15T10:00:00'
+    // If left empty, we default to 30 days from first load.
+    const LAUNCH_DATE = '';
+
+    // === Countdown logic ===
+    const now = new Date();
+    const target = LAUNCH_DATE ? new Date(LAUNCH_DATE) : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30, 10, 0, 0);
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function tick(){
+      const t = target.getTime() - Date.now();
+      const el = (id) => document.getElementById(id);
+      if (t <= 0) {
+        el('d').textContent = '00'; el('h').textContent = '00'; el('m').textContent = '00'; el('s').textContent = '00';
+        return;
+      }
+      const d = Math.floor(t / (1000*60*60*24));
+      const h = Math.floor((t / (1000*60*60)) % 24);
+      const m = Math.floor((t / (1000*60)) % 60);
+      const s = Math.floor((t / 1000) % 60);
+      el('d').textContent = pad(d);
+      el('h').textContent = pad(h);
+      el('m').textContent = pad(m);
+      el('s').textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // === Email capture (demo) ===
+    function subscribe(e) {
+      e.preventDefault();
+      const input = document.getElementById('email');
+      const email = input.value.trim();
+      const out = document.getElementById('feedback');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        out.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      try {
+        const key = 'makriva_waitlist';
+        const prev = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!prev.includes(email)) prev.push(email);
+        localStorage.setItem(key, JSON.stringify(prev));
+        out.textContent = 'Awesome! You\'re on the Makriva waitlist.';
+        input.value = '';
+      } catch(err) {
+        out.textContent = 'Thanks! You\'re on the list.';
+      }
+    }
+    window.subscribe = subscribe;
+  </script>
+</body>
+</html>
