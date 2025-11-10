@@ -23,7 +23,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; padding: 0; }
+    html, body { height: 100%; margin: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell;
@@ -62,21 +62,74 @@
     .hero > section { padding: 3rem; }
 
     .brand {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 12px; margin-bottom: .5rem;
       text-decoration: none; color: inherit;
     }
 
     .brand img {
-      width: 42px; height: 42px; border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
     }
 
-    .brand-name { font-size: 28px; font-weight: 700; }
+    .brand-name { font-size: 28px; font-weight: 700; letter-spacing: .5px; }
 
-    h1 { font-size: clamp(26px, 5vw, 52px); margin: 10px 0 12px; }
+    h1 { font-size: clamp(26px, 5vw, 52px); line-height: 1.05; margin: 10px 0 12px; }
     p.lead { font-size: 18px; color: var(--muted); margin: 0 0 18px; }
 
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
     .chip { background: var(--chip); color: #5a4d3e; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
+
+    .cta {
+      display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center;
+      margin-top: 14px;
+    }
+
+    .cta input[type="email"] {
+      width: 100%; padding: 14px; border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px; background: #fff; outline: none;
+      font-size: 16px;
+    }
+
+    .cta button {
+      padding: 14px 18px; border: 0; border-radius: 12px; cursor: pointer; font-weight: 700;
+      background: linear-gradient(180deg, var(--accent), #3d7451);
+      color: #fff; box-shadow: 0 8px 22px var(--ring);
+    }
+
+    .cta button:active { transform: translateY(1px); }
+
+    .countdown { display: flex; gap: 14px; margin-top: 22px; }
+    .tile {
+      flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06);
+      border-radius: 14px; text-align: center; padding: 12px 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    }
+
+    .num { font-size: clamp(22px, 4vw, 34px); font-weight: 800; }
+    .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+
+    .aside {
+      background: linear-gradient(180deg, #fff, #f8f4ed);
+      border-left: 1px solid rgba(0,0,0,.05);
+      display: grid; place-items: center;
+    }
+
+    .pack {
+      width: min(92%, 420px);
+      aspect-ratio: 4/5;
+      border-radius: 28px;
+      background: radial-gradient(120% 90% at 30% 12%, #fff, #f2eee6 55%, #e9e1d6 100%);
+      box-shadow: 0 16px 40px rgba(45,35,25,.18);
+      border: 1px solid rgba(0,0,0,.05);
+      padding: 18px;
+      display: grid; place-items: center;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .pack img { width: 80%; border-radius: 16px; }
+
+    @keyframes float { 50% { transform: translateY(-6px); } }
 
     .footer {
       display: flex; justify-content: space-between; align-items: center;
@@ -86,17 +139,13 @@
     }
 
     .footer .small { font-size: 13px; color: var(--muted); }
-
-    .footer a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
+    .footer a { color: var(--accent); text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
+      .aside { order: -1; }
+      .pack { width: 200px; aspect-ratio: 1; }
     }
   </style>
 </head>
@@ -112,7 +161,7 @@
             <span class="brand-name">Makriva</span>
           </a>
 
-          <h1>Fresh. Light. <br>Stay Tuned.</h1>
+          <h1>Fresh. Light. <br>Coming Soon.</h1>
           <p class="lead">Premium makhana — roasted to perfection and seasoned with care. We’re getting the crunch just right before launch!</p>
 
           <div class="chips">
@@ -120,22 +169,71 @@
             <span class="chip">Roasted • Gluten-free</span>
             <span class="chip">Made in India</span>
           </div>
+
+          <form class="cta" onsubmit="subscribe(event)">
+            <input id="email" name="email" type="email" placeholder="Enter your email for updates" required />
+            <button type="submit">Notify Me</button>
+          </form>
+          <div id="feedback" class="small" style="min-height:1.4em; margin-top:6px"></div>
+
+          <div class="countdown">
+            <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
+            <div class="tile"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
+            <div class="tile"><div class="num" id="m">—</div><div class="lbl">Mins</div></div>
+            <div class="tile"><div class="num" id="s">—</div><div class="lbl">Secs</div></div>
+          </div>
         </section>
 
-        <aside class="aside" style="display:grid;place-items:center;background:linear-gradient(180deg,#fff,#f8f4ed);border-left:1px solid rgba(0,0,0,.05);">
-          <img src="makriva.png" alt="Makriva Logo Large" style="width:220px; border-radius:18px; box-shadow:var(--shadow);" />
+        <aside class="aside">
+          <div class="pack">
+            <img src="makriva.png" alt="Makriva Logo Large" />
+          </div>
         </aside>
       </div>
 
       <footer class="footer">
         <div class="small">
           📍 345 Housing Board Colony, Jind, Haryana 126102<br>
-          📞 <a href="tel:+919416272945">+91-9416272945</a> •
-          ✉️ <a href="mailto:jaglan980@gmail.com">jaglan980@gmail.com</a>
+          📞 <a href="tel:+918708900083">+91 87089 00083</a> • ✉️ <a href="mailto:inquire@makriva.com">inquire@makriva.com</a>
         </div>
         <a href="about.html">About Us</a>
       </footer>
     </div>
   </main>
+
+  <script>
+    const LAUNCH_DATE = '';
+    const now = new Date();
+    const target = LAUNCH_DATE ? new Date(LAUNCH_DATE) : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30, 10, 0, 0);
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function tick(){
+      const t = target.getTime() - Date.now();
+      const el = id => document.getElementById(id);
+      if (t <= 0) { ['d','h','m','s'].forEach(id => el(id).textContent='00'); return; }
+      const d = Math.floor(t / (1000*60*60*24));
+      const h = Math.floor((t / (1000*60*60)) % 24);
+      const m = Math.floor((t / (1000*60)) % 60);
+      const s = Math.floor((t / 1000) % 60);
+      el('d').textContent = pad(d); el('h').textContent = pad(h); el('m').textContent = pad(m); el('s').textContent = pad(s);
+    }
+    tick(); setInterval(tick, 1000);
+
+    function subscribe(e) {
+      e.preventDefault();
+      const input = document.getElementById('email');
+      const email = input.value.trim();
+      const out = document.getElementById('feedback');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { out.textContent = 'Please enter a valid email.'; return; }
+      try {
+        const key = 'makriva_waitlist';
+        const prev = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!prev.includes(email)) prev.push(email);
+        localStorage.setItem(key, JSON.stringify(prev));
+        out.textContent = 'Awesome! You’re on the Makriva waitlist.';
+        input.value = '';
+      } catch { out.textContent = 'Thanks! You’re on the list.'; }
+    }
+  </script>
 </body>
 </html>
