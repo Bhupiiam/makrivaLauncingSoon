@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us — Makriva</title>
-  <meta name="description" content="Learn more about Makriva — premium roasted makhana brand founded in Jind, Haryana." />
+  <meta name="description" content="Learn more about Makriva — premium roasted makhana brand from Jind, Haryana." />
+  <link rel="icon" type="image/png" href="makriva.png" />
   <style>
     :root {
       --bg: #faf6ef;
@@ -20,11 +21,10 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell;
       background: linear-gradient(180deg, var(--bg), var(--bg-2));
       color: var(--text);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -40,36 +40,13 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 1.5rem; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; }
 
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
-      box-shadow: 0 6px 18px rgba(78, 139, 99, 0.35);
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-    }
+    main { flex: 1; display: grid; place-items: center; padding: 2rem; }
 
     .card {
-      max-width: 900px;
-      width: 100%;
+      max-width: 900px; width: 100%;
       background: rgba(255, 255, 255, 0.75);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -77,110 +54,31 @@
       backdrop-filter: blur(6px);
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-top: 0;
-    }
+    h1 { margin-top: 0; font-size: 2rem; }
 
-    .about-text {
-      margin-bottom: 2rem;
-      color: var(--muted);
-    }
+    .about-text { margin-bottom: 2rem; color: var(--muted); }
 
-    .founder {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
+    .founder { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 1.5rem; }
+    .founder img { width: 150px; height: 150px; border-radius: 18px; object-fit: cover; box-shadow: var(--shadow); }
 
-    .founder img {
-      width: 140px;
-      height: 140px;
-      border-radius: 18px;
-      object-fit: cover;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
+    .info a { color: var(--accent); text-decoration: none; }
+    .info a:hover { text-decoration: underline; }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+    .social { margin-top: 1.5rem; display: flex; gap: 14px; }
+    .social a { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--chip); color: var(--text); text-decoration: none; }
 
-    .info a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .back-btn { display: inline-block; margin-top: 2rem; background: var(--accent); color: #fff; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; text-decoration: none; }
 
-    .info a:hover {
-      text-decoration: underline;
-    }
+    .back-btn:hover { background: #3d7451; }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(6px);
-    }
-
-    .social {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .social a {
-      display: inline-grid;
-      place-items: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: var(--chip);
-      color: var(--text);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      text-decoration: none;
-    }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 2rem;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(78, 139, 99, 0.35);
-    }
-
-    .back-btn:hover {
-      background: #3d7451;
-    }
-
-    @media (max-width: 700px) {
-      .founder {
-        flex-direction: column;
-        text-align: center;
-      }
-      .founder img {
-        width: 160px;
-        height: 160px;
-      }
-    }
+    footer { text-align: center; padding: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.05); background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(6px); }
   </style>
 </head>
+
 <body>
   <header>
     <a href="index.html" class="brand">
-      <span class="logo">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8"/>
-        </svg>
-      </span>
+      <img src="makriva.png" alt="Makriva Logo" />
       Makriva
     </a>
   </header>
@@ -189,38 +87,23 @@
     <div class="card">
       <h1>About Makriva</h1>
       <p class="about-text">
-        At <strong>Makriva</strong>, we believe snacking should be pure, healthy, and full of natural flavor. 
-        Born from a passion for quality and authenticity, Makriva crafts premium roasted makhanas — light, crunchy, and seasoned with care. 
-        Every pack is a blend of freshness, wellness, and the rich taste of India’s favorite superfood.
+        At <strong>Makriva</strong>, we believe snacking should be healthy, authentic, and full of natural flavor. 
+        Born from a love for quality, Makriva brings you premium roasted makhanas — light, crunchy, and crafted with care right here in India.
       </p>
 
       <div class="founder">
         <img src="image.png" alt="Founder Aman - Makriva">
         <div class="info">
           <strong>Founder:</strong> Aman<br>
-          <strong>Address:</strong> 
-          <a href="https://www.google.com/maps?q=345+Housing+Board+Colony,+Jind,+Haryana+126102" target="_blank">
-            345 Housing Board Colony, Jind, Haryana 126102
-          </a><br>
-          <strong>Phone:</strong> <a href="tel:+918708900083">+91 87089 00083</a><br>
-          <strong>Email:</strong> <a href="mailto:1goo2glewithme@gmail.com">inquire@makriva.com</a>
+          <strong>Address:</strong> <a href="https://www.google.com/maps?q=345+Housing+Board+Colony,+Jind,+Haryana+126102" target="_blank">345 Housing Board Colony, Jind, Haryana 126102</a><br>
+          <strong>Phone:</strong> <a href="tel:+919416272945">+91-9416272945</a><br>
+          <strong>Email:</strong> <a href="mailto:jaglan980@gmail.com">jaglan980@gmail.com</a>
         </div>
       </div>
 
       <div class="social">
-        <a href="https://www.instagram.com/just__badal/" target="_blank" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
-          </svg>
-        </a>
-        <a href="mailto:jaglan980@gmail.com" aria-label="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-        </a>
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">📷</a>
+        <a href="mailto:jaglan980@gmail.com" aria-label="Email">✉️</a>
       </div>
 
       <a href="index.html" class="back-btn">← Back to Home</a>
