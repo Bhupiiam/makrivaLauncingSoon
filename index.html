@@ -22,16 +22,17 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html, body { height: 100%; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial;
       color: var(--text);
-      background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%) ,
+      background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%),
                   radial-gradient(800px 500px at 90% 10%, #fff, transparent 60%),
                   radial-gradient(900px 600px at 50% 110%, #fff, transparent 60%),
                   linear-gradient(180deg, var(--bg), var(--bg-2));
       line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
     }
 
     .seeds {
@@ -44,129 +45,137 @@
       filter: blur(.4px);
     }
 
-    .wrap { display: grid; place-items: center; min-height: 100dvh; padding: clamp(16px, 3.5vw, 40px); }
+    .wrap { display: grid; place-items: center; min-height: 100vh; padding: 2rem; }
+
     .card {
       width: min(100%, var(--maxw));
       background: rgba(255, 255, 255, .6);
       border: 1px solid rgba(0,0,0,.04);
       backdrop-filter: saturate(140%) blur(8px);
-      border-radius: clamp(14px, 2vw, var(--radius));
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: clip;
-      position: relative;
+      overflow: hidden;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      z-index: 1;
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1.5rem; }
+    .hero > section { padding: 3rem; }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem;
+      text-decoration: none; color: inherit;
     }
 
-    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(16px, 2.8vw, 28px); }
-    .hero > section { padding: clamp(20px, 4.2vw, 60px); }
-
-    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: clamp(6px, 1.2vw, 8px); text-decoration: none; color: inherit; }
-    .logo { width: 40px; height: 40px; border-radius: 12px; display: inline-grid; place-items: center;
-      background: conic-gradient(from 220deg, var(--accent), var(--accent-2)); box-shadow: 0 6px 18px var(--ring); overflow: hidden; }
-    .logo img { width: 100%; height: 100%; object-fit: cover; }
-    .brand-name { font-size: clamp(22px, 3.6vw, 30px); font-weight: 700; letter-spacing: .5px; }
-
-    h1 { 
-      font-size: clamp(24px, 5vw, 52px); line-height: 1.05; margin: 10px 0 12px; 
-      background: linear-gradient(90deg, var(--text), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .logo {
+      width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px var(--ring);
     }
-    p.lead { font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); margin: 0 0 18px; }
+
+    .brand-name { font-size: 28px; font-weight: 700; letter-spacing: .5px; }
+
+    h1 { font-size: clamp(24px, 5vw, 52px); line-height: 1.05; margin: 10px 0 12px; }
+    p.lead { font-size: 18px; color: var(--muted); margin: 0 0 18px; }
 
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
     .chip { background: var(--chip); color: #5a4d3e; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
 
-    .cta { display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center; margin-top: 14px; }
-    .cta input[type="email"] {
-      width: 100%; padding: 14px; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; background: #fff; font-size: 16px;
+    .cta {
+      display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center;
+      margin-top: 14px;
     }
+
+    .cta input[type="email"] {
+      width: 100%; padding: 14px 14px; border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px; background: #fff; outline: none;
+      font-size: 16px;
+    }
+
     .cta button {
       padding: 14px 18px; border: 0; border-radius: 12px; cursor: pointer; font-weight: 700;
-      background: linear-gradient(180deg, var(--accent), #3d7451); color: #fff;
+      background: linear-gradient(180deg, var(--accent), #3d7451);
+      color: #fff; box-shadow: 0 8px 22px var(--ring);
     }
+
+    .cta button:active { transform: translateY(1px); }
 
     .countdown { display: flex; gap: 14px; margin-top: 22px; }
     .tile {
       flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06);
       border-radius: 14px; text-align: center; padding: 12px 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
     }
+
     .num { font-size: clamp(22px, 4vw, 34px); font-weight: 800; }
     .lbl { font-size: 12px; color: var(--muted); letter-spacing: .3px; text-transform: uppercase; }
 
     .aside {
       background: linear-gradient(180deg, #fff, #f8f4ed);
       border-left: 1px solid rgba(0,0,0,.05);
-      display: grid; place-items: center; position: relative;
+      display: grid; place-items: center; position: relative; overflow: hidden;
     }
+
     .pack {
       width: min(92%, 420px); aspect-ratio: 4/5; border-radius: 28px;
       background: radial-gradient(120% 90% at 30% 12%, #fff, #f2eee6 55%, #e9e1d6 100%);
-      box-shadow: 0 16px 40px rgba(45,35,25,.18), 0 3px 0 #e2d7c7 inset;
+      box-shadow: 0 16px 40px rgba(45,35,25,.18);
       border: 1px solid rgba(0,0,0,.05);
       padding: 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 10px;
-      position: relative; overflow: hidden;
+      transform: rotate(-4deg);
+      animation: float 6s ease-in-out infinite;
     }
 
-    /* Simplified static overlay */
-    .mystery-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, rgba(45, 35, 25, 0.85), rgba(78, 139, 99, 0.85));
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border-radius: 28px;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      z-index: 10;
+    @keyframes float { 50% { transform: rotate(-3deg) translateY(-6px); } }
+
+    .pack .top { display: flex; align-items: center; gap: 10px; }
+    .pack .leaf {
+      width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2)); color: #fff;
+      box-shadow: 0 6px 18px var(--ring);
     }
 
-    .mystery-text {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
+    .pack h2 { margin: 0; font-size: 18px; }
 
-    .mystery-subtext {
-      font-size: 14px;
-      opacity: 0.85;
+    .pack .middle { display: grid; place-items: center; position: relative; isolation: isolate; }
+    .makhana {
+      width: 75%; aspect-ratio: 1;
+      background: radial-gradient(closest-side, #eadfcd 70%, #d8c9b2 71%);
+      border-radius: 50%;
+      box-shadow: 0 18px 40px rgba(45,35,25,.18);
     }
 
     .footer {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 18px clamp(20px, 4.2vw, 60px); border-top: 1px solid rgba(0,0,0,.06);
+      padding: 18px 40px; border-top: 1px solid rgba(0,0,0,.06);
       background: #fff9; backdrop-filter: blur(6px);
-      flex-wrap: wrap; gap: 15px;
+      flex-wrap: wrap; gap: 10px;
     }
 
-    .contact-info { display: flex; flex-direction: column; gap: 5px; }
-    .contact-details { display: flex; flex-wrap: wrap; gap: 15px; font-size: 13px; color: var(--muted); }
-    .social { display: flex; gap: 12px; }
-    .social a { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
-      background: var(--chip); color: var(--text); text-decoration: none; }
+    .footer .small { font-size: 13px; color: var(--muted); }
+
+    .social { display: flex; gap: 12px; align-items: center; }
+
+    .social a {
+      display: inline-grid; place-items: center; width: 38px; height: 38px;
+      border-radius: 12px; background: var(--chip); color: var(--text);
+      border: 1px solid rgba(0,0,0,.05); text-decoration: none;
+    }
+
+    .footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
       .aside { order: -1; }
-      .footer { flex-direction: column; align-items: flex-start; }
-      .contact-details { flex-direction: column; gap: 5px; }
+      .pack { transform: none; animation: none; margin: 10px 0; }
     }
   </style>
 </head>
+
 <body>
   <div class="seeds" aria-hidden="true"></div>
   <main class="wrap">
@@ -174,12 +183,16 @@
       <div class="hero">
         <section>
           <a class="brand" href="#">
-            <span class="logo"><img src="makriva.png" alt="Makriva Logo" /></span>
+            <span class="logo">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8"/>
+              </svg>
+            </span>
             <span class="brand-name">Makriva</span>
           </a>
 
           <h1>Fresh. Light. <span style="white-space:nowrap">Coming Soon.</span></h1>
-          <p class="lead">Premium makhana (fox nuts) — roasted to perfection, seasoned with care. We're getting the crunch just right before we launch.</p>
+          <p class="lead">Premium makhana (fox nuts) — roasted to perfection, seasoned with care. We’re getting the crunch just right before we launch.</p>
 
           <div class="chips">
             <span class="chip">100% Natural</span>
@@ -188,10 +201,10 @@
           </div>
 
           <form class="cta" onsubmit="subscribe(event)">
-            <input id="email" type="email" placeholder="Enter your email for launch updates" required />
-            <button type="submit">Notify me</button>
+            <input id="email" name="email" type="email" placeholder="Enter your email for launch updates" required />
+            <button type="submit">Notify Me</button>
           </form>
-          <div id="feedback" class="small" style="min-height:1.4em; margin-top:6px"></div>
+          <div id="feedback" class="small" role="status" style="min-height:1.4em; margin-top:6px"></div>
 
           <div class="countdown">
             <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
@@ -203,19 +216,15 @@
 
         <aside class="aside">
           <div class="pack">
-            <div class="mystery-overlay" id="mysteryOverlay">
-              <div class="mystery-text">Coming Soon</div>
-              <div class="mystery-subtext">Going Live on 1st January 2026, Stay Tuned</div>
-            </div>
             <div class="top">
               <span class="leaf">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8"/>
+                </svg>
               </span>
               <h2>Makriva</h2>
             </div>
-            <div class="middle">
-              <div class="makhana"></div>
-            </div>
+            <div class="middle"><div class="makhana"></div></div>
             <div class="bottom">
               <span>Premium Roasted Makhana</span>
               <span class="badge">Launching Soon</span>
@@ -225,61 +234,62 @@
       </div>
 
       <footer class="footer">
-        <div class="contact-info">
-          <div class="small">Made with ❤ in India • <strong>Makriva</strong></div>
-          <div class="contact-details">
-            <span>Mobile: +91-8398030577</span>
-            <span>Address: Jawahar Nagar, Safidon Road, Opp Bullet Agency, Jind, Haryana 126102</span>
-            <span>Founder: Aman</span>
-          </div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
         </div>
+
+        <div class="small">
+          📍 345 Housing Board Colony, Jind, Haryana 126102<br>
+          📞 <a href="tel:+919416272945" style="color:inherit; text-decoration:none;">+91-9416272945</a> •
+          ✉️ <a href="mailto:jaglan980@gmail.com" style="color:inherit; text-decoration:none;">jaglan980@gmail.com</a>
+        </div>
+
         <nav class="social">
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="mailto:hello@makriva.com" aria-label="Email">✉️</a>
+          <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
+            </svg>
+          </a>
         </nav>
       </footer>
     </div>
   </main>
 
   <script>
-    const LAUNCH_DATE = '2026-01-01T00:00:00';
-    const target = new Date(LAUNCH_DATE);
+    const LAUNCH_DATE = '';
+    const now = new Date();
+    const target = LAUNCH_DATE ? new Date(LAUNCH_DATE) : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30, 10, 0, 0);
 
     function pad(n){ return String(n).padStart(2, '0'); }
     function tick(){
-      const t = target - Date.now();
-      const el = (id) => document.getElementById(id);
+      const t = target.getTime() - Date.now();
+      const el = id => document.getElementById(id);
       if (t <= 0) { ['d','h','m','s'].forEach(id => el(id).textContent='00'); return; }
       const d = Math.floor(t / (1000*60*60*24));
       const h = Math.floor((t / (1000*60*60)) % 24);
       const m = Math.floor((t / (1000*60)) % 60);
       const s = Math.floor((t / 1000) % 60);
-      el('d').textContent = pad(d);
-      el('h').textContent = pad(h);
-      el('m').textContent = pad(m);
-      el('s').textContent = pad(s);
+      el('d').textContent = pad(d); el('h').textContent = pad(h); el('m').textContent = pad(m); el('s').textContent = pad(s);
     }
-    tick();
-    setInterval(tick, 1000);
+    tick(); setInterval(tick, 1000);
 
     function subscribe(e) {
       e.preventDefault();
       const input = document.getElementById('email');
       const email = input.value.trim();
       const out = document.getElementById('feedback');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        out.textContent = 'Please enter a valid email address.';
-        return;
-      }
-      const key = 'makriva_waitlist';
-      const prev = JSON.parse(localStorage.getItem(key) || '[]');
-      if (!prev.includes(email)) prev.push(email);
-      localStorage.setItem(key, JSON.stringify(prev));
-      out.textContent = "Awesome! You're on the Makriva waitlist.";
-      input.value = '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { out.textContent = 'Please enter a valid email.'; return; }
+      try {
+        const key = 'makriva_waitlist';
+        const prev = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!prev.includes(email)) prev.push(email);
+        localStorage.setItem(key, JSON.stringify(prev));
+        out.textContent = 'Awesome! You’re on the Makriva waitlist.';
+        input.value = '';
+      } catch { out.textContent = 'Thanks! You’re on the list.'; }
     }
-    window.subscribe = subscribe;
   </script>
 </body>
 </html>
