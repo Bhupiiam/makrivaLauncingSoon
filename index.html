@@ -25,7 +25,7 @@
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial;
       color: var(--text);
       background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%),
                   radial-gradient(800px 500px at 90% 10%, #fff, transparent 60%),
@@ -77,11 +77,16 @@
     }
 
     .logo img {
-      width: 48px; height: 48px; border-radius: 12px; box-shadow: 0 6px 18px var(--ring);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px var(--ring);
     }
 
     .brand-name {
-      font-size: clamp(22px, 3.6vw, 30px); font-weight: 700; letter-spacing: .5px;
+      font-size: clamp(22px, 3.6vw, 30px);
+      font-weight: 700;
+      letter-spacing: .5px;
     }
 
     h1 { font-size: clamp(24px, 5vw, 52px); line-height: 1.05; margin: 10px 0 12px; }
@@ -90,31 +95,76 @@
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
     .chip { background: var(--chip); color: #5a4d3e; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
 
-    .cta { display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center; margin-top: 14px; }
+    .cta {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      margin-top: 14px;
+    }
     .cta input[type="email"] {
-      width: 100%; padding: 14px 14px; border: 1px solid rgba(0,0,0,.08);
-      border-radius: 12px; background: #fff; outline: none;
+      width: 100%;
+      padding: 14px 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      background: #fff;
+      outline: none;
       font-size: 16px;
     }
     .cta button {
-      padding: 14px 18px; border: 0; border-radius: 12px; cursor: pointer; font-weight: 700;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
       background: linear-gradient(180deg, var(--accent), #3d7451);
-      color: #fff; box-shadow: 0 8px 22px var(--ring);
+      color: #fff;
+      box-shadow: 0 8px 22px var(--ring);
     }
 
-    .countdown { display: flex; gap: 14px; margin-top: 22px; }
-    .tile { flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; text-align: center; padding: 12px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+    .countdown {
+      display: flex;
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .tile {
+      flex: 1 1 0;
+      min-width: 72px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 14px;
+      text-align: center;
+      padding: 12px 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    }
     .num { font-size: clamp(22px, 4vw, 34px); font-weight: 800; }
     .lbl { font-size: 12px; color: var(--muted); letter-spacing: .3px; text-transform: uppercase; }
 
     .footer {
-      display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
-      padding: 18px clamp(20px, 4.2vw, 60px); border-top: 1px solid rgba(0,0,0,.06);
-      background: #fff9; backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      padding: 18px clamp(20px, 4.2vw, 60px);
+      border-top: 1px solid rgba(0,0,0,.06);
+      background: #fff9;
+      backdrop-filter: blur(6px);
     }
 
     .social { display: flex; gap: 12px; justify-content: center; }
-    .social a { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--chip); color: var(--text); border: 1px solid rgba(0,0,0,.05); text-decoration: none; }
+    .social a {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--chip);
+      color: var(--text);
+      border: 1px solid rgba(0,0,0,.05);
+      text-decoration: none;
+    }
+
     .small { font-size: 13px; color: var(--muted); }
 
     @media (max-width: 900px) {
@@ -174,7 +224,6 @@
 
   <script>
     const LAUNCH_DATE = '2026-01-01T00:00:00';
-    const now = new Date();
     const target = new Date(LAUNCH_DATE);
 
     function pad(n){ return String(n).padStart(2, '0'); }
@@ -202,7 +251,7 @@
       const input = document.getElementById('email');
       const email = input.value.trim();
       const out = document.getElementById('feedback');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
         out.textContent = 'Please enter a valid email address.';
         return;
       }
@@ -211,10 +260,10 @@
         const prev = JSON.parse(localStorage.getItem(key) || '[]');
         if (!prev.includes(email)) prev.push(email);
         localStorage.setItem(key, JSON.stringify(prev));
-        out.textContent = 'Awesome! You\'re on the Makriva waitlist.';
+        out.textContent = 'Awesome! You\\'re on the Makriva waitlist.';
         input.value = '';
       } catch(err) {
-        out.textContent = 'Thanks! You\'re on the list.';
+        out.textContent = 'Thanks! You\\'re on the list.';
       }
     }
     window.subscribe = subscribe;
