@@ -8,12 +8,12 @@
   <meta name="theme-color" content="#f6efe5" />
   <style>
     :root {
-      --bg: #faf6ef;            /* warm cream */
-      --bg-2: #f1eadf;          /* deeper cream */
-      --text: #2d2319;          /* roasted-brown */
+      --bg: #faf6ef;
+      --bg-2: #f1eadf;
+      --text: #2d2319;
       --muted: #6d5e4e;
-      --accent: #4e8b63;        /* pistachio green */
-      --accent-2: #9cc49f;      /* soft green */
+      --accent: #4e8b63;
+      --accent-2: #9cc49f;
       --chip: #efe7dc;
       --ring: rgba(78, 139, 99, .35);
       --shadow: 0 10px 30px rgba(45, 35, 25, .15);
@@ -21,14 +21,13 @@
       --maxw: 1024px;
     }
 
-    /* Reset */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
-      background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%) ,
+      background: radial-gradient(1000px 600px at 10% 20%, #fff, transparent 60%),
                   radial-gradient(800px 500px at 90% 10%, #fff, transparent 60%),
                   radial-gradient(900px 600px at 50% 110%, #fff, transparent 60%),
                   linear-gradient(180deg, var(--bg), var(--bg-2));
@@ -37,7 +36,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Organic seed shapes in the background */
     .seeds {
       position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .2;
       background-image:
@@ -78,10 +76,8 @@
       text-decoration: none; color: inherit;
     }
 
-    .logo {
-      width: 40px; height: 40px; border-radius: 12px; display: inline-grid; place-items: center;
-      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
-      box-shadow: 0 6px 18px var(--ring);
+    .logo img {
+      width: 48px; height: 48px; border-radius: 12px; box-shadow: 0 6px 18px var(--ring);
     }
 
     .brand-name {
@@ -94,10 +90,7 @@
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
     .chip { background: var(--chip); color: #5a4d3e; padding: 6px 10px; border-radius: 999px; font-size: 13px; }
 
-    .cta {
-      display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center;
-      margin-top: 14px;
-    }
+    .cta { display: grid; gap: 10px; grid-template-columns: 1fr auto; align-items: center; margin-top: 14px; }
     .cta input[type="email"] {
       width: 100%; padding: 14px 14px; border: 1px solid rgba(0,0,0,.08);
       border-radius: 12px; background: #fff; outline: none;
@@ -108,88 +101,25 @@
       background: linear-gradient(180deg, var(--accent), #3d7451);
       color: #fff; box-shadow: 0 8px 22px var(--ring);
     }
-    .cta button:active { transform: translateY(1px); }
 
     .countdown { display: flex; gap: 14px; margin-top: 22px; }
-    .tile {
-      flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06);
-      border-radius: 14px; text-align: center; padding: 12px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.06);
-    }
+    .tile { flex: 1 1 0; min-width: 72px; background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; text-align: center; padding: 12px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
     .num { font-size: clamp(22px, 4vw, 34px); font-weight: 800; }
     .lbl { font-size: 12px; color: var(--muted); letter-spacing: .3px; text-transform: uppercase; }
 
-    .aside {
-      background: linear-gradient(180deg, #fff, #f8f4ed);
-      border-left: 1px solid rgba(0,0,0,.05);
-      display: grid; place-items: center; position: relative; overflow: hidden;
-    }
-    .pack {
-      width: min(92%, 420px); aspect-ratio: 4/5; border-radius: 28px;
-      background: radial-gradient(120% 90% at 30% 12%, #fff, #f2eee6 55%, #e9e1d6 100%);
-      box-shadow: 0 16px 40px rgba(45,35,25,.18), 0 3px 0 #e2d7c7 inset;
-      border: 1px solid rgba(0,0,0,.05);
-      padding: 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 10px;
-      transform: rotate(-4deg);
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float { 50% { transform: rotate(-3deg) translateY(-6px); } }
-
-    .pack .top { display: flex; align-items: center; gap: 10px; }
-    .pack .leaf {
-      width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
-      background: conic-gradient(from 220deg, var(--accent), var(--accent-2)); color: #fff;
-      box-shadow: 0 6px 18px var(--ring);
-    }
-    .pack h2 { margin: 0; font-size: 18px; letter-spacing: .4px; }
-
-    .pack .middle {
-      display: grid; place-items: center; position: relative; isolation: isolate;
-    }
-    .makhana {
-      width: 75%; aspect-ratio: 1;
-      background:
-        radial-gradient(120px 80px at 40% 30%, #fff, rgba(255,255,255,.8) 45%, transparent 46%),
-        radial-gradient(120px 80px at 70% 70%, #fff, rgba(255,255,255,.7) 50%, transparent 51%),
-        radial-gradient(closest-side, #eadfcd 70%, #d8c9b2 71%);
-      border-radius: 50%;
-      box-shadow: 0 18px 40px rgba(45,35,25,.18) , 0 0 0 1px rgba(0,0,0,.05) inset;
-      position: relative;
-    }
-    .makhana::after, .makhana::before {
-      content: ""; position: absolute; background: #d1c2ab; filter: blur(.2px);
-      border-radius: 50%; opacity: .6;
-    }
-    .makhana::after { width: 28%; height: 20%; left: 58%; top: 42%; transform: rotate(22deg); }
-    .makhana::before { width: 18%; height: 14%; left: 32%; top: 58%; transform: rotate(-12deg); }
-
-    .pack .bottom {
-      display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted);
-    }
-    .badge { background: #e8f3eb; color: #2f6b47; padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 11px; letter-spacing: .3px; }
-
     .footer {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
       padding: 18px clamp(20px, 4.2vw, 60px); border-top: 1px solid rgba(0,0,0,.06);
       background: #fff9; backdrop-filter: blur(6px);
     }
 
-    .social { display: flex; gap: 12px; }
+    .social { display: flex; gap: 12px; justify-content: center; }
     .social a { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--chip); color: var(--text); border: 1px solid rgba(0,0,0,.05); text-decoration: none; }
     .small { font-size: 13px; color: var(--muted); }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
-      .aside { order: -1; }
-      .pack { transform: none; animation: none; margin: 10px 0; }
-      .countdown { justify-content: space-between; }
     }
-
-    /* Focus styles */
-    :focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; border-radius: 8px; }
-
-    /* Utility */
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
   </style>
 </head>
 <body>
@@ -199,12 +129,7 @@
       <div class="hero">
         <section>
           <a class="brand" href="#" aria-label="Makriva home">
-            <span class="logo" aria-hidden="true">
-              <!-- leaf icon -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8" fill="none"/>
-              </svg>
-            </span>
+            <span class="logo"><img src="image.png" alt="Makriva Logo" /></span>
             <span class="brand-name">Makriva</span>
           </a>
 
@@ -213,7 +138,7 @@
 
           <div class="chips" aria-hidden="true">
             <span class="chip">100% Natural</span>
-            <span class="chip">Roasted • Gluten‑free</span>
+            <span class="chip">Roasted • Gluten-free</span>
             <span class="chip">Made in India</span>
           </div>
 
@@ -231,64 +156,26 @@
             <div class="tile" aria-label="Seconds"><div class="num" id="s">—</div><div class="lbl">Secs</div></div>
           </div>
         </section>
-
-        <aside class="aside">
-          <!-- playful, brandable pack mockup -->
-          <div class="pack" aria-hidden="true">
-            <div class="top">
-              <span class="leaf">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M19.5 4.5C12 6 6 12 4.5 19.5c7.5-1.5 13.5-7.5 15-15Z" stroke="white" stroke-width="1.8" fill="none"/>
-                </svg>
-              </span>
-              <h2>Makriva</h2>
-            </div>
-            <div class="middle">
-              <div class="makhana"></div>
-            </div>
-            <div class="bottom">
-              <span>Premium Roasted Makhana</span>
-              <span class="badge">Launching Soon</span>
-            </div>
-          </div>
-        </aside>
       </div>
 
       <footer class="footer">
         <div class="small">Made with ❤ in India • <strong>Makriva</strong></div>
+        <div class="small">Contact: <a href="tel:+918398030577">+91-8398030577</a></div>
+        <div class="small">Address: Jawahar Nagar, Safidon Road, Opp Bullet Agency, Jind, Haryana 126102</div>
+        <div class="small"><strong>Owner & Founder:</strong> Aman</div>
         <nav class="social" aria-label="Social links">
-          <a href="#" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
-              <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/>
-              <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
-            </svg>
-          </a>
-          <a href="#" aria-label="X (Twitter)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="1.8"/>
-            </svg>
-          </a>
-          <a href="mailto:hello@makriva.com" aria-label="Email">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" fill="none"/>
-              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" fill="none"/>
-            </svg>
-          </a>
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="mailto:hello@makriva.com" aria-label="Email">✉️</a>
         </nav>
       </footer>
     </div>
   </main>
 
   <script>
-    // === CONFIG ===
-    // Set your launch date/time here (local time). Example: '2026-01-15T10:00:00'
-    // If left empty, we default to 30 days from first load.
-    const LAUNCH_DATE = '';
-
-    // === Countdown logic ===
+    const LAUNCH_DATE = '2026-01-01T00:00:00';
     const now = new Date();
-    const target = LAUNCH_DATE ? new Date(LAUNCH_DATE) : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30, 10, 0, 0);
+    const target = new Date(LAUNCH_DATE);
 
     function pad(n){ return String(n).padStart(2, '0'); }
     function tick(){
@@ -310,7 +197,6 @@
     tick();
     setInterval(tick, 1000);
 
-    // === Email capture (demo) ===
     function subscribe(e) {
       e.preventDefault();
       const input = document.getElementById('email');
